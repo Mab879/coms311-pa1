@@ -7,6 +7,8 @@
 // DO NOT INCLUDE LIBRARIES OUTSIDE OF THE JAVA STANDARD LIBRARY
 //  (i.e., you may include java.util.ArrayList etc. here, but not junit, apache commons, google guava, etc.)
 
+import jdk.jshell.spi.ExecutionControl;
+
 /**
 * @author Hugh Potter
 */
@@ -17,7 +19,6 @@ public class HashCodeSimilarity
 
 	public HashCodeSimilarity(String s1, String s2, int sLength)
 	{
-		// implementation
 	}
 
 	public float lengthOfS1()

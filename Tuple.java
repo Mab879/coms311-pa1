@@ -13,25 +13,50 @@
 
 public class Tuple
 {
-	// member fields and other member methods
+	private int key;
+	private String value;
 
+	/**
+	 * Tuple Constructor
+	 *
+	 * @param keyP
+	 * @param valueP
+	 */
 	public Tuple(int keyP, String valueP)
 	{
-		// implementation
+		key = keyP;
+		value = valueP;
 	}
 
+
+	/**
+	 * Get the key of the tuple
+	 *
+	 * @return key of the tuple
+	 */
 	public int getKey()
 	{
-		// implementation
+		return key;
 	}
 
+	/**
+	 * Get the value of the tuple
+	 *
+	 * @return value of the tuple
+	 */
 	public String getValue()
 	{
-		// implementation
+		return value;
 	}
 
+	/**
+	 * Check equality
+	 *
+	 * @param t tuple to compare
+	 * @return true if this tuple and the given tuple are equal
+	 */
 	public boolean equals(Tuple t)
 	{
-		// implementation
+		return key == t.getKey() && value.equals(t.getValue());
 	}
 }
