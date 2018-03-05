@@ -23,16 +23,18 @@ public class HashCodeSimilarity
 
 	public float lengthOfS1()
 	{
-		// implementation
+		throw new UnsupportedOperationException();
 	}
 
 	public float lengthOfS2()
 	{
+        throw new UnsupportedOperationException();
 		// implementation
 	}
 
 	public float similarity()
 	{
+        throw new UnsupportedOperationException();
 		// implementation
 	}
 }

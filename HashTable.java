@@ -23,46 +23,46 @@ public class HashTable
 
 	public int maxLoad()
 	{
-		// implementation
+        throw new UnsupportedOperationException();
 	}
 
 	public float averageLoad()
 	{
-		// implementation
+        throw new UnsupportedOperationException();
 	}
 
 	public int size()
 	{
-		// implementation
+        throw new UnsupportedOperationException();
 	}
 
 	public int numElements()
 	{
-		// implementation
+        throw new UnsupportedOperationException();
 	}
 
 	public float loadFactor()
 	{
-		// implementation
+        throw new UnsupportedOperationException();
 	}
 
 	public void add(Tuple t)
 	{
-		// implementation
+        throw new UnsupportedOperationException();
 	}
 
 	public ArrayList<Tuple> search(int k)
 	{
-		// implementation
+        throw new UnsupportedOperationException();
 	}
 
 	public int search(Tuple t)
 	{
-		// implementation
+        throw new UnsupportedOperationException();
 	}
 
 	public void remove(Tuple t)
 	{
-		// implementation		
+        throw new UnsupportedOperationException();
 	}
 }

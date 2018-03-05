@@ -17,21 +17,25 @@ public class HashStringSimilarity
 
 	public HashStringSimilarity(String s1, String s2, int sLength)
 	{
+		throw new UnsupportedOperationException();
 		// implementation
 	}
 
 	public float lengthOfS1()
 	{
+		throw new UnsupportedOperationException();
 		// implementation
 	}
 
 	public float lengthOfS2()
 	{
+		throw new UnsupportedOperationException();
 		// implementation
 	}
 
 	public float similarity()
 	{
+		throw new UnsupportedOperationException();
 		// implementation
 	}
 }

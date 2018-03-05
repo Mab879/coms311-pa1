@@ -14,24 +14,29 @@
 public class BruteForceSimilarity
 {
 	// member fields and other member methods
+	public String stringOne;
+	public String stringTwo;
+	public int shingleLength;
 
 	public BruteForceSimilarity(String s1, String s2, int sLength)
 	{
-		// implementation
+		stringOne = s1;
+		stringTwo = s2;
+		shingleLength = sLength;
 	}
 
 	public float lengthOfS1()
 	{
-		// implementation
+		throw new UnsupportedOperationException();
 	}
 
 	public float lengthOfS2()
 	{
-		// implementation
+		throw new UnsupportedOperationException();
 	}
 
 	public float similarity()
 	{
-		// implementation
+		throw new UnsupportedOperationException();
 	}
 }
