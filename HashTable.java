@@ -6,6 +6,7 @@
 
 // DO NOT INCLUDE LIBRARIES OUTSIDE OF THE JAVA STANDARD LIBRARY
 //  (i.e., you may include java.util.ArrayList etc. here, but not junit, apache commons, google guava, etc.)
+import java.util.ArrayList;
 
 /**
 * @author Hugh Potter
