@@ -9,7 +9,7 @@
 
 /**
  * @author Matthew Burket
- * @author
+ * @author Joel May
  */
 
 public class Tuple {
