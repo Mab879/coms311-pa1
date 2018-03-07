@@ -4,11 +4,11 @@
  */
 abstract class AbstractHashSimilarity extends AbstractSimilarity {
     /** A hash table for the shingles of s1. */ // A random guess at a good initial size.
-    private HashTable s1HT = new HashTable(10);
+    private HashTable s1HT = new HashTable(13);
     /** An iterable array of Tuples in s1HT. */
     private Tuple[] s1Arr;
     /** A hash table for the shingles of s2. */ // A random guess at a good initial size.
-    private HashTable s2HT = new HashTable(10);
+    private HashTable s2HT = new HashTable(13);
     /** An iterable array of Tuples in s2HT. */
     private Tuple[] s2Arr;
 
