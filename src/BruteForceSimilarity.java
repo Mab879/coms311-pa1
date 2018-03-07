@@ -50,12 +50,20 @@ public class BruteForceSimilarity extends AbstractSimilarity {
 
     @Override
     public float lengthOfS1() {
-        throw new UnsupportedOperationException();
+        int sum = 0;
+        for (String s : shinglesS1) {
+            sum += countOccurances(shinglesS1, s);
+        }
+        return (float) Math.sqrt(sum);
     }
 
     @Override
     public float lengthOfS2() {
-        throw new UnsupportedOperationException();
+        int sum = 0;
+        for (String s : shinglesS2) {
+            sum += countOccurances(shinglesS2, s);
+        }
+        return (float) Math.sqrt(sum);
     }
 
     @Override
@@ -73,6 +81,17 @@ public class BruteForceSimilarity extends AbstractSimilarity {
         ArrayList<String> result = new ArrayList<>();
         for (int i = 1; i < s.length() - sLength; i++) {
             result.add(s.substring(i, sLength));
+        }
+        return result;
+    }
+
+
+    private static int countOccurances(ArrayList<String> strings, String s) {
+        int result = 0;
+        for (String string : strings) {
+            if (string.equals(s)) {
+                result++;
+            }
         }
         return result;
     }
