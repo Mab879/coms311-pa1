@@ -8,7 +8,8 @@
 //  (i.e., you may include java.util.ArrayList etc. here, but not junit, apache commons, google guava, etc.)
 
 /**
- * @author Hugh Potter
+ * @author Matthew Burket
+ * @author
  */
 
 public class Tuple {
@@ -18,8 +19,8 @@ public class Tuple {
     /**
      * Tuple Constructor
      *
-     * @param keyP
-     * @param valueP
+     * @param keyP key of tuple
+     * @param valueP value of the tuple
      */
     public Tuple(int keyP, String valueP) {
         key = keyP;
