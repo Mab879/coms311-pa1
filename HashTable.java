@@ -22,7 +22,6 @@ public class HashTable {
     public HashTable(int size) {
         this.size = Utils.getPrime(size);
         hashFunction = new HashFunction(size);
-        numElements = 0;
     }
 
     public int maxLoad() {
