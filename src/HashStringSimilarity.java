@@ -21,6 +21,7 @@ public class HashStringSimilarity extends AbstractSimilarity {
      */
     public HashStringSimilarity(String s1, String s2, int sLength) {
         super(s1, s2, sLength);
+        // TODO ingest s1 and s2 as shingles
     }
 
     @Override

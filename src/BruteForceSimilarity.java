@@ -12,6 +12,11 @@
  */
 
 public class BruteForceSimilarity extends AbstractSimilarity {
+    /** String 1 to compare. */
+    private String s1;
+    /** String 2 to compare. */
+    private String s2;
+
     /**
      * Constructor to initialize the values.
      *
@@ -21,6 +26,8 @@ public class BruteForceSimilarity extends AbstractSimilarity {
      */
     public BruteForceSimilarity(String s1, String s2, int sLength) {
         super(s1, s2, sLength);
+        this.s1 = s1;
+        this.s2 = s2;
     }
 
     @Override

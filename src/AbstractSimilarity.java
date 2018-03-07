@@ -4,10 +4,6 @@
  */
 
 abstract class AbstractSimilarity {
-    /** String 1 to compare. */
-    protected String s1;
-    /** String 2 to compare. */
-    protected String s2;
     /** The shingle size for comparisons. */
     protected int sLength;
 
@@ -17,8 +13,8 @@ abstract class AbstractSimilarity {
      * @param s2 string 2 to compare
      * @param sLength the shingle size for comparisons
      */
-    public AbstractSimilarity(String s1, String s2, int sLength) {
-
+    protected AbstractSimilarity(String s1, String s2, int sLength) {
+        this.sLength = sLength;
     }
 
     /**
