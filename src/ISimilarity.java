@@ -1,5 +1,6 @@
 /**
- * @author joel0
+ * @author Matthew Burket
+ * @author Joel May
  */
 
 interface ISimilarity {
