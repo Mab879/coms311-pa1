@@ -1,11 +1,12 @@
+import java.util.*;
+
+// Provided class.  We cannot change the implementation. :(
+
 /**
  * Implements a random hash function of
  * the form (ax+b)%p.
  * Integers a and b are chosen randomly from {0,1, ...p-1}
  */
-
-import java.util.*;
-
 public class HashFunction {
 
     private int a, b, p;
@@ -21,7 +22,6 @@ public class HashFunction {
         while (b == 0) {
             b = r.nextInt(p);
         }
-
     }
 
     /**
@@ -31,7 +31,6 @@ public class HashFunction {
     public int hash(int x) {
         x = (int) Math.abs(x);
         return (int) Math.abs((a * x + b) % p);
-
     }
 
     private int findPrime(int n) {
@@ -44,7 +43,6 @@ public class HashFunction {
             num++;
         }
         return -1;
-
     }
 
     private boolean isPrime(int n) {
