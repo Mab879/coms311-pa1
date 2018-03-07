@@ -6,63 +6,53 @@
 
 // DO NOT INCLUDE LIBRARIES OUTSIDE OF THE JAVA STANDARD LIBRARY
 //  (i.e., you may include java.util.ArrayList etc. here, but not junit, apache commons, google guava, etc.)
+
 import java.util.ArrayList;
 
 /**
-* @author Hugh Potter
-*/
+ * @author Hugh Potter
+ */
 
-public class HashTable
-{
-	// member fields and other member methods
+public class HashTable {
+    // member fields and other member methods
 
-	public HashTable(int size)
-	{
-		// implementation
-	}
+    public HashTable(int size) {
+        // implementation
+    }
 
-	public int maxLoad()
-	{
+    public int maxLoad() {
         throw new UnsupportedOperationException();
-	}
+    }
 
-	public float averageLoad()
-	{
+    public float averageLoad() {
         throw new UnsupportedOperationException();
-	}
+    }
 
-	public int size()
-	{
+    public int size() {
         throw new UnsupportedOperationException();
-	}
+    }
 
-	public int numElements()
-	{
+    public int numElements() {
         throw new UnsupportedOperationException();
-	}
+    }
 
-	public float loadFactor()
-	{
+    public float loadFactor() {
         throw new UnsupportedOperationException();
-	}
+    }
 
-	public void add(Tuple t)
-	{
+    public void add(Tuple t) {
         throw new UnsupportedOperationException();
-	}
+    }
 
-	public ArrayList<Tuple> search(int k)
-	{
+    public ArrayList<Tuple> search(int k) {
         throw new UnsupportedOperationException();
-	}
+    }
 
-	public int search(Tuple t)
-	{
+    public int search(Tuple t) {
         throw new UnsupportedOperationException();
-	}
+    }
 
-	public void remove(Tuple t)
-	{
+    public void remove(Tuple t) {
         throw new UnsupportedOperationException();
-	}
+    }
 }

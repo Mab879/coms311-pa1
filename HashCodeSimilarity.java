@@ -10,31 +10,26 @@
 import jdk.jshell.spi.ExecutionControl;
 
 /**
-* @author Hugh Potter
-*/
+ * @author Hugh Potter
+ */
 
-public class HashCodeSimilarity
-{
-	// member fields and other member methods
+public class HashCodeSimilarity {
+    // member fields and other member methods
 
-	public HashCodeSimilarity(String s1, String s2, int sLength)
-	{
-	}
+    public HashCodeSimilarity(String s1, String s2, int sLength) {
+    }
 
-	public float lengthOfS1()
-	{
-		throw new UnsupportedOperationException();
-	}
-
-	public float lengthOfS2()
-	{
+    public float lengthOfS1() {
         throw new UnsupportedOperationException();
-		// implementation
-	}
+    }
 
-	public float similarity()
-	{
+    public float lengthOfS2() {
         throw new UnsupportedOperationException();
-		// implementation
-	}
+        // implementation
+    }
+
+    public float similarity() {
+        throw new UnsupportedOperationException();
+        // implementation
+    }
 }
