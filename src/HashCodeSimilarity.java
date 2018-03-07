@@ -11,7 +11,7 @@
  * @author Hugh Potter
  */
 
-public class HashCodeSimilarity {
+public class HashCodeSimilarity implements ISimilarity {
     // member fields and other member methods
 
     public HashCodeSimilarity(String s1, String s2, int sLength) {

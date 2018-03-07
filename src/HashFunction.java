@@ -1,15 +1,20 @@
-/**
- * Implements a random hash function of
- * the form (ax+b)%p.
- * Integers a and b are chosen randomly from {0,1, ...p-1}
- */
-
 import java.util.*;
 
+// Provided class.  We cannot change the implementation. :(
+
+/**
+ * Implements a random hash function of the form (ax+b)%p.
+ * Integers a and b are chosen randomly from {0,1,...,p-1}
+ */
 public class HashFunction {
 
     private int a, b, p;
 
+    /**
+     * Picks the first (positive) prime integer p whose value is at least range.
+     * Then picks two random integers x and y from {0, 1, ··· , p−1}
+     * @param range the number to find a prime above
+     */
     public HashFunction(int range) {
         p = findPrime(range);
         Random r = new Random();
@@ -21,7 +26,6 @@ public class HashFunction {
         while (b == 0) {
             b = r.nextInt(p);
         }
-
     }
 
     /**
@@ -31,7 +35,6 @@ public class HashFunction {
     public int hash(int x) {
         x = (int) Math.abs(x);
         return (int) Math.abs((a * x + b) % p);
-
     }
 
     private int findPrime(int n) {
@@ -44,7 +47,6 @@ public class HashFunction {
             num++;
         }
         return -1;
-
     }
 
     private boolean isPrime(int n) {
