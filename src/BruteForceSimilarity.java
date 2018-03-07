@@ -11,7 +11,7 @@
  * @author Hugh Potter
  */
 
-public class BruteForceSimilarity {
+public class BruteForceSimilarity implements ISimilarity {
     // member fields and other member methods
     public String stringOne;
     public String stringTwo;
