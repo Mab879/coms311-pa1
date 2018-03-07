@@ -16,22 +16,25 @@
  * A key-value mapping from an int to a string.
  */
 public class Tuple {
-    /** The key for this tuple. */
+    /**
+     * The key for this tuple.
+     */
     private int key;
-    /** The value for the tuple. */
+    /**
+     * The value for the tuple.
+     */
     private String value;
 
     /**
      * Tuple Constructor
      *
-     * @param keyP key of tuple
+     * @param keyP   key of tuple
      * @param valueP value of the tuple
      */
     public Tuple(int keyP, String valueP) {
         key = keyP;
         value = valueP;
     }
-
 
     /**
      * Get the key of the tuple
