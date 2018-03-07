@@ -8,6 +8,7 @@
 //  (i.e., you may include java.util.ArrayList etc. here, but not junit, apache commons, google guava, etc.)
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * @author Matthew Burket
@@ -16,20 +17,31 @@ import java.util.ArrayList;
 
 public class HashTable {
     // member fields and other member methods
+    /** The Hash function to use */
     private HashFunction hashFunction;
+    /** Size of the hashtable */
     private int size;
+    /** This is the data structure  */
+    private LinkedList<Tuple>[] table;
+    /** Total number of elements including dups */
+    private int totalElements;
 
     /**
      * Constructs a HashTable with a size of the prime larger and closest to size.
+     *
      * @param size the basis for the table size; used to find a prime
      */
     public HashTable(int size) {
         this.size = Utils.getPrime(size);
         hashFunction = new HashFunction(size);
+        table = new LinkedList[size];
+        totalElements = 0;
+
     }
 
     /**
      * The maximum load of the hash table.
+     *
      * @return the maximum load of the hash table
      */
     public int maxLoad() {
@@ -38,14 +50,18 @@ public class HashTable {
 
     /**
      * The average load of the hash table.
+     * Total number of elements (including dups) / size
+     *
      * @return the average load of the hash table
      */
     public float averageLoad() {
-        throw new UnsupportedOperationException();
+        return (float) totalElements / (float) size;
     }
+
 
     /**
      * The current size of the hash table.
+     *
      * @return the current size of the hash table
      */
     public int size() {
@@ -54,6 +70,7 @@ public class HashTable {
 
     /**
      * The number of *distinct* tuples stored in the hash table.
+     *
      * @return the number of *distinct* tuples in the hash table
      */
     public int numElements() {
@@ -62,6 +79,7 @@ public class HashTable {
 
     /**
      * The load factor
+     *
      * @return numElements()/size()
      */
     public float loadFactor() {
@@ -70,14 +88,20 @@ public class HashTable {
 
     /**
      * Adds the tuple to the hash table. May increase the size of the table as necessary.
+     *
      * @param t the tuple to be added.
      */
     public void add(Tuple t) {
+        totalElements++;
+        if (loadFactor() >= 0.7) {
+            rehash();
+        }
         throw new UnsupportedOperationException();
     }
 
     /**
      * Gets the elements whose key equals k.
+     *
      * @param k the key to search for
      * @return the elements with the key
      */
@@ -87,6 +111,7 @@ public class HashTable {
 
     /**
      * Finds the number of occurrences of the specified tuple.
+     *
      * @param t the tuple to search for
      * @return the number of occurrences of the tuple
      */
@@ -96,9 +121,14 @@ public class HashTable {
 
     /**
      * Removes *one occurrence* of the tuple, if it exists.
+     *
      * @param t the tuple to remove
      */
     public void remove(Tuple t) {
+        throw new UnsupportedOperationException();
+    }
+
+    private void rehash() {
         throw new UnsupportedOperationException();
     }
 }
