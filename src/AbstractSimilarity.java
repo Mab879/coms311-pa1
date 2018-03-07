@@ -9,11 +9,9 @@ abstract class AbstractSimilarity {
 
     /**
      * Constructor to initialize the values.
-     * @param s1 string 1 to compare
-     * @param s2 string 2 to compare
      * @param sLength the shingle size for comparisons
      */
-    protected AbstractSimilarity(String s1, String s2, int sLength) {
+    protected AbstractSimilarity(int sLength) {
         this.sLength = sLength;
     }
 
