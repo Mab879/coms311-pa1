@@ -1,7 +1,4 @@
 public class Utils {
-    public static float vectorLength(String s) {
-        throw new UnsupportedOperationException();
-    }
     public static int getPrime(int num) {
         while (true) {
             if (isPrime(num)) {
