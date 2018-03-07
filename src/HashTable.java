@@ -10,14 +10,18 @@
 import java.util.ArrayList;
 
 /**
- * @author Hugh Potter
+ * @author Matthew Burket
+ * @author Joel May
  */
 
 public class HashTable {
     // member fields and other member methods
+    private HashFunction hashFunction;
+    private int size;
 
     public HashTable(int size) {
-        // implementation
+        this.size = Utils.getPrime(size);
+        hashFunction = new HashFunction(size);
     }
 
     public int maxLoad() {
@@ -29,7 +33,7 @@ public class HashTable {
     }
 
     public int size() {
-        throw new UnsupportedOperationException();
+        return size;
     }
 
     public int numElements() {
@@ -37,7 +41,7 @@ public class HashTable {
     }
 
     public float loadFactor() {
-        throw new UnsupportedOperationException();
+        return (float) numElements() / (float) size();
     }
 
     public void add(Tuple t) {
