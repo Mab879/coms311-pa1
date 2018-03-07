@@ -10,7 +10,7 @@ class Utils {
 
     static boolean isPrime(int num) {
         for (int i = 2; i < Math.sqrt(num); i++) {
-            if (i % 2 == 0) {
+            if (num % i == 0) {
                 return false;
             }
         }

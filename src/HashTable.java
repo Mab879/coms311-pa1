@@ -23,8 +23,9 @@ public class HashTable {
     private int size;
     /** This is the data structure  */
     private LinkedList<Tuple>[] table;
-    /** Total number of elements including dups */
+    /** Total number of elements */
     private int totalElements;
+    private int numInitLists;
 
     /**
      * Constructs a HashTable with a size of the prime larger and closest to size.
@@ -34,8 +35,9 @@ public class HashTable {
     public HashTable(int size) {
         this.size = Utils.getPrime(size);
         hashFunction = new HashFunction(size);
-        table = new LinkedList[size];
+        table = new LinkedList[this.size];
         totalElements = 0;
+        numInitLists = 0;
 
     }
 
@@ -45,7 +47,16 @@ public class HashTable {
      * @return the maximum load of the hash table
      */
     public int maxLoad() {
-        throw new UnsupportedOperationException();
+        int max = 0;
+        for (LinkedList l : table) {
+            if (l == null) {
+                continue;
+            }
+            if (l.size() > max) {
+                max = l.size();
+            }
+        }
+        return max;
     }
 
     /**
@@ -55,7 +66,10 @@ public class HashTable {
      * @return the average load of the hash table
      */
     public float averageLoad() {
-        return (float) totalElements / (float) size;
+        if (numInitLists == 0) {
+            return 0;
+        }
+        return (float) totalElements / (float) numInitLists;
     }
 
 
@@ -74,7 +88,17 @@ public class HashTable {
      * @return the number of *distinct* tuples in the hash table
      */
     public int numElements() {
-        throw new UnsupportedOperationException();
+        ArrayList<Tuple> nonDups = new ArrayList<>();
+        for (LinkedList<Tuple> l : table) {
+            if (l != null) {
+                for (Tuple t : l) {
+                    if (!nonDups.contains(t)) {
+                        nonDups.add(t);
+                    }
+                }
+            }
+        }
+        return nonDups.size();
     }
 
     /**
@@ -93,10 +117,15 @@ public class HashTable {
      */
     public void add(Tuple t) {
         totalElements++;
+        int hash = hashFunction.hash(t.getKey());
+        if (table[hash] == null) {
+            table[hash] = new LinkedList<>();
+            numInitLists++;
+        }
+        table[hash].add(t);
         if (loadFactor() >= 0.7) {
             rehash();
         }
-        throw new UnsupportedOperationException();
     }
 
     /**
@@ -106,7 +135,17 @@ public class HashTable {
      * @return the elements with the key
      */
     public ArrayList<Tuple> search(int k) {
-        throw new UnsupportedOperationException();
+        int hash = hashFunction.hash(k);
+        ArrayList<Tuple> result = new ArrayList<>();
+        if (table[hash] == null) {
+            return result;
+        }
+        for (Tuple t : table[hash]) {
+            if (t.getKey() == k) {
+                result.add(t);
+            }
+        }
+        return result;
     }
 
     /**
@@ -116,7 +155,17 @@ public class HashTable {
      * @return the number of occurrences of the tuple
      */
     public int search(Tuple t) {
-        throw new UnsupportedOperationException();
+       int hash = hashFunction.hash(t.getKey());
+       if (table[hash] == null) {
+           return 0;
+       }
+       int count = 0;
+       for (Tuple loopTuple : table[hash]) {
+           if (loopTuple.equals(t)) {
+               count++;
+           }
+       }
+       return count;
     }
 
     /**
@@ -125,10 +174,45 @@ public class HashTable {
      * @param t the tuple to remove
      */
     public void remove(Tuple t) {
-        throw new UnsupportedOperationException();
+       int hash = hashFunction.hash(t.getKey());
+       if (table[hash] == null) {
+           return;
+       }
+       for (Tuple loopT : table[hash]) {
+           if (loopT.equals(t)) {
+               table[hash].removeFirstOccurrence(loopT);
+               totalElements--;
+           }
+       }
+       if (table[hash].size() <= 0) {
+           table[hash] = null;
+           numInitLists--;
+       }
     }
 
+    /**
+     * Resize the hashtable table
+     */
     private void rehash() {
-        throw new UnsupportedOperationException();
+        int newSize = Utils.getPrime(size() * 2);
+        HashFunction newHash = new HashFunction(newSize);
+        LinkedList<Tuple>[] newTable = new LinkedList[newSize];
+        int numInit = 0;
+        for (LinkedList<Tuple> l : table) {
+            if (l != null) {
+                for (Tuple t : l) {
+                    int hash = newHash.hash(t.getKey());
+                    if (newTable[hash] == null) {
+                        numInit++;
+                        newTable[hash] = new LinkedList<>();
+                    }
+                    newTable[hash].add(t);
+                }
+            }
+        }
+        this.size = newSize;
+        this.table = newTable;
+        this.numInitLists = numInit;
+        this.hashFunction = newHash;
     }
 }

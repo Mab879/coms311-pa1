@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.junit.Test;
+import org.junit.Assert;
 
 /**
  * Test from https://piazza.com/class/jd1e3y0mtbkfp?cid=131
