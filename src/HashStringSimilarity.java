@@ -11,24 +11,31 @@
  * @author Hugh Potter
  */
 
-public class HashStringSimilarity implements ISimilarity {
-    // member fields and other member methods
-
+public class HashStringSimilarity extends AbstractSimilarity {
+    /**
+     * Constructor to initialize the values.
+     *
+     * @param s1      string 1 to compare
+     * @param s2      string 2 to compare
+     * @param sLength the shingle size for comparisons
+     */
     public HashStringSimilarity(String s1, String s2, int sLength) {
-        throw new UnsupportedOperationException();
-        // implementation
+        super(s1, s2, sLength);
     }
 
+    @Override
     public float lengthOfS1() {
         throw new UnsupportedOperationException();
         // implementation
     }
 
+    @Override
     public float lengthOfS2() {
         throw new UnsupportedOperationException();
         // implementation
     }
 
+    @Override
     public float similarity() {
         throw new UnsupportedOperationException();
         // implementation
