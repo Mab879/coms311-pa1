@@ -64,6 +64,15 @@ public class Tuple {
         if (t == null) {
             return false;
         }
-        return key == t.getKey() && value.equals(t.getValue());
+        if (key == t.getKey()) {
+            if (value == null && t.getValue() == null) {
+                return true;
+            }
+            if (value == null) {
+                return false;
+            }
+            return value.equals(t.getValue());
+        }
+        return false;
     }
 }

@@ -11,26 +11,36 @@
  * @author Hugh Potter
  */
 
-public class BruteForceSimilarity implements ISimilarity {
-    // member fields and other member methods
-    public String stringOne;
-    public String stringTwo;
-    public int shingleLength;
+public class BruteForceSimilarity extends AbstractSimilarity {
+    /** String 1 to compare. */
+    private String s1;
+    /** String 2 to compare. */
+    private String s2;
 
+    /**
+     * Constructor to initialize the values.
+     *
+     * @param s1      string 1 to compare
+     * @param s2      string 2 to compare
+     * @param sLength the shingle size for comparisons
+     */
     public BruteForceSimilarity(String s1, String s2, int sLength) {
-        stringOne = s1;
-        stringTwo = s2;
-        shingleLength = sLength;
+        super(s1, s2, sLength);
+        this.s1 = s1;
+        this.s2 = s2;
     }
 
+    @Override
     public float lengthOfS1() {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public float lengthOfS2() {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public float similarity() {
         throw new UnsupportedOperationException();
     }
