@@ -12,8 +12,13 @@
  * @author Joel May
  */
 
+/**
+ * A key-value mapping from an int to a string.
+ */
 public class Tuple {
+    /** The key for this tuple. */
     private int key;
+    /** The value for the tuple. */
     private String value;
 
     /**
@@ -53,6 +58,9 @@ public class Tuple {
      * @return true if this tuple and the given tuple are equal
      */
     public boolean equals(Tuple t) {
+        if (t == null) {
+            return false;
+        }
         return key == t.getKey() && value.equals(t.getValue());
     }
 }
