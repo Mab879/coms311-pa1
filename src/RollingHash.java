@@ -10,13 +10,21 @@ class RollingHash {
     private String s;
 
     private int nextShinglePos = 0;
-    private String shingleStr;
     private int rollingHash;
 
     RollingHash(String s, int sLength) {
+        // Validate arguments
+        if (s == null) {
+            s = "";
+        }
+        if (sLength < 1) {
+            throw new IllegalArgumentException("Shingle size must be positive");
+        }
+
+        // Initialize instance variables
         this.s = s;
         this.sLength = sLength;
-        alphaToNMinusOne = alpha ^ (sLength - 1);
+        alphaToNMinusOne = (int) Math.pow(alpha, sLength - 1);
     }
 
     Tuple next() {
@@ -24,17 +32,16 @@ class RollingHash {
             return null;
         }
 
+        // Calculate the shingle string
+        String shingleStr = s.substring(nextShinglePos, nextShinglePos + sLength);
         // Calculate the hash
         if (nextShinglePos == 0) {
             rollingHash = shingleStr.hashCode();
         } else {
             rollingHash = nextHash();
         }
-        // Calculate the shingle string
-        shingleStr = s.substring(nextShinglePos, sLength);
 
         nextShinglePos++;
-        assert rollingHash == shingleStr.hashCode();
         return new Tuple(rollingHash, shingleStr);
     }
 

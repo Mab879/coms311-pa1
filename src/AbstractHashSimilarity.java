@@ -50,7 +50,8 @@ abstract class AbstractHashSimilarity extends AbstractSimilarity {
     private float vectorLength(IterableHashTable S) {
         int sum = 0;
         for (Tuple i : S) {
-            sum += (countOccurrencesInS(i, S)) ^ 2;
+            int occurrences = countOccurrencesInS(i, S);
+            sum += occurrences * occurrences; // occurrences squared
         }
         return (float) Math.sqrt(sum);
     }
