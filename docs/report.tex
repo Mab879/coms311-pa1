@@ -189,4 +189,14 @@ similarity()
 \subsection{Run Time}
 \section{Similarity Results}
 \section{Similarity Equality}
+The \texttt{BruteForceSimilarity} and \texttt{HashStringSimilarity} produce the
+same results. The former two may output different results from
+\texttt{HashCodeSimilarity}. \texttt{BruteForceSimilarity} makes calculations
+based on string comparisons alone. \texttt{HashStringSimilarity} compares
+strings, but uses hashcodes to locate the strings for comparison. Since the
+hashcode function on strings is a total function, all equal strings have the
+same hash. This results in fewer string comparisons, but equivalent results. The
+\texttt{HashCodeSimilarity} only calculates based on the hashcodes, which allows
+for hash collisions to falsely appear as an equivalent string. This affects the
+results of the functions in the case of hash collisions.
 \end{document}
