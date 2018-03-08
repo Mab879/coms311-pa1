@@ -156,16 +156,22 @@ assignment. Under the hood the hash table uses an array of LinkedList to store t
 iterator to work over the all entries in the hash table.
 \subsection{Run Time}
 \subsubsection{Constructor}
-The constructor is what creates the shingles and loads up the hash table. The rolling hash calculates the exponent once
-and the running time is assumed to be $O(k)$. Next the rolling hash loops over the string. This loop will run
-$n-k$ or $m-k$ times. On each iteration of the loop the rolling hash takes $O(k)$. Then the loop adds the item to the
-union set. It does by calling HashTable.search(Tuple t) which walks though the tuples in the in that list. The worst
-case would be that will strings ended up in the same row so the worst-case running time would be $O(k)$. If the doesn't
-find it then it would add it to the union set which would be $O(1)$. Then last action of the is to add to the sMultiSet
-which is time to find the hash of key and and place in the correct link list which can be effectively called $O(1)$.
+The constructor creates shingles. First the construstor calcuates
+the upper bound by using multiplication, subtractions, and addition. Next the contrustor for the HashTable and the 
+HashFunction need to find a prime for the size. Using Bertrand's postulate we know prime is least 2 where n is the 
+number. So in the worst case it will take O(2n) to find the next prime. Next the constructor loads up the hash tables.
 
-Overall, the running time is $(n-k) + (m-k) * (O(k)+O(k)+O(n)+O(1)+O(1))$. We can simplify to $(m-k) + (n-k) * O(1)$.
-Also since we know that $k < 14$ in our implementation we can say if is effectively $O(m+n)$.   
+Next, we are now in the constructor for the RollingHash. The main thing the constructor does is
+calcuates the alphaToNMinusOne which takes $O(sLength)$ time.
+
+Next, the step of loading the hashes is working on creating the shingles. The \texttt{for} loop executes $n-k$ or $m-k$ 
+times. In the loop the rolling hash is calculated which takes $O(1)$. Then the loop tries to add to the unionset. It 
+does this by calling search. Search will find the spot where tuple should be. Since we are assume that hash function is 
+perfect it should take $O(k+1)$. Next we, assume that it doesn't exist and thus we will need to add with $O(1)$ to 
+the hash table. Next we will add to the multi set which will take $O(1)$.
+
+Overall, $(n-k) + (m-k) * O(1) + O(k+1) + O(1) + O(1)$
+
 \subsubsection{\texttt{vectorLength()}}
 The loop runs for $n-k$ or $m-k$ times.
 \subsection{Similarity Results}
