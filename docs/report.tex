@@ -101,8 +101,15 @@ in effect $O(n^2)$ or $O(m^2)$.
 \subsection{Similarity Results}
 \section{HashStringSimilarity}
 \subsection{Pseudo Code}
-\subsubsection{\texttt{lengthOfS1()} and \texttt{lengthOfS2()}}
-\texttt{s} is the hash table of shingles. \texttt{lengthOfS1} and \texttt{lengthOfS2} will pass the correct HashTable to this method.
+\subsubsection{\texttt{lengthOfS1()}} 
+\begin{verbatim}
+vectorLength(s1MultiSet)
+\end{verbatim}
+\subsubsection{\texttt{lengthOfS2()}}
+\begin{verbatim}
+vectorLength(s2MultiSet)
+\end{verbatim}
+\subsubsection{\texttt{vectorLength(IterableHashTable s)}}
 \begin{verbatim}
 vectorLength(IterableHashTable s)
     HashTable countedValues = HashTable(13)
@@ -116,6 +123,14 @@ vectorLength(IterableHashTable s)
     return Math.sqrt(sum)
 \end{verbatim}
 \subsubsection{\texttt{similarity()}}
+\begin{verbatim}
+similarity()
+    numerator = 0;
+    // unionSet that was created before in the constructor
+    for (Tuple i : unionSet)
+        numerator += s1MultiSet.search(i) * s2MultiSet.search(i)
+    numerator += s1MultiSet.search(hashForCompare) * s2MultiSet.search(hashForCompare);
+\end{verbatim}
 \subsection{Data Structures }
 \subsection{Run Time}
 \subsection{Similarity Results}
