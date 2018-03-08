@@ -51,12 +51,25 @@ lengthOfS1()
 \subsection{\texttt{vectorLength(strings[])}}
 \subsubsection{\texttt{similarity()}}
 \subsection{Data Structures}
+The BruteForceSimilarity uses ArrayList as its primary data structure. It doesn't directly use any arrays.
 \subsection{Run Time}
 \subsection{Similarity Results}
 \section{HashStringSimilarity}
 \subsection{Pseudo Code}
-\subsubsection{\texttt{lengthOfS1()}}
-\subsubsection{\texttt{lengthOfS2()}}
+\subsubsection{\texttt{lengthOfS1()} and \texttt{lengthOfS2()}}
+\texttt{s} is the hash table of shingles. \texttt{lengthOfS1} and \texttt{lengthOfS2} will pass the correct HashTable to this method.
+\begin{verbatim}
+vectorLength(IterableHashTable s)
+    HashTable countedValues = HashTable(13)
+    sum = 0
+    for Tuple i in S
+        Tuple hashForCompare = t;
+        if (countedValues.search(t) == 0)
+            countedValues.add(hashForCompare);
+            occurrences = S.search(hashForCompare);
+            sum += occurrences * occurrences;
+    return Math.sqrt(sum)
+\end{verbatim}
 \subsubsection{\texttt{similarity()}}
 \subsection{Data Structures }
 \subsection{Run Time}
@@ -65,7 +78,7 @@ lengthOfS1()
 \subsection{Pseudo Code}
 \subsubsection{\texttt{lengthOfS1()}}
 \subsubsection{\texttt{lengthOfS2()}}
-\subsubsection{\texttt{similarity()}}	
+\subsubsection{\texttt{similarity()}}
 \subsection{Data Structure }
 \subsection{Run Time}
 \section{Similarity Results}
