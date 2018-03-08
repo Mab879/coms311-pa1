@@ -26,11 +26,11 @@ public class BruteForceSimilarity extends AbstractSimilarity {
     /**
      * shingles for s1
      */
-    ArrayList<String> shinglesS1;
+    private ArrayList<String> shinglesS1;
     /**
      * shingles for s2
      */
-    ArrayList<String> shinglesS2;
+    private ArrayList<String> shinglesS2;
 
 
     /**
@@ -115,6 +115,13 @@ public class BruteForceSimilarity extends AbstractSimilarity {
     }
 
 
+    /**
+     * Counts the number of times s occurs in strings
+     *
+     * @param strings the ArrayList of strings to search though
+     * @param s       the string to search for
+     * @return number of times s is in strings
+     */
     private static int countOccurrences(ArrayList<String> strings, String s) {
         int result = 0;
         for (String string : strings) {
