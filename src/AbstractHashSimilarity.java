@@ -42,23 +42,23 @@ abstract class AbstractHashSimilarity extends AbstractSimilarity {
     public float similarity() {
         int numerator = 0;
         for (Tuple i : unionSet) {
-            numerator += countOccurrencesInS(i, s1MultiSet) * countOccurrencesInS(i, s2MultiSet);
+            numerator += s1MultiSet.search(i) * s2MultiSet.search(i);
         }
         return (float) numerator / lengthOfS1() / lengthOfS2();
     }
 
     private float vectorLength(IterableHashTable S) {
+        HashTable countedValues = new HashTable(13);
         int sum = 0;
         for (Tuple i : S) {
-            int occurrences = countOccurrencesInS(i, S);
-            sum += occurrences * occurrences; // occurrences squared
+            Tuple hashForCompare = processSHash(i);
+            if (countedValues.search(hashForCompare) == 0) {
+                countedValues.add(hashForCompare);
+                int occurrences = S.search(hashForCompare);
+                sum += occurrences * occurrences; // occurrences squared
+            }
         }
         return (float) Math.sqrt(sum);
-    }
-
-    private int countOccurrencesInS(Tuple i, HashTable ht) {
-        Tuple search = processSHash(i);
-        return ht.search(search);
     }
 
     private void addUnionHash(Tuple t) {
