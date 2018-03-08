@@ -1,4 +1,5 @@
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * Test from https://piazza.com/class/jd1e3y0mtbkfp?cid=131
@@ -61,7 +62,7 @@ public class TestSimilarity
     {
         HashStringSimilarity bfs = new HashStringSimilarity(
                 similarityString1, similarityString2, similarityShingleLength);
-        assert (bfs.similarity() == similarityAnswer);
+        assertEquals(similarityAnswer, bfs.similarity(), 0.0001);
     }
 
     @Test
