@@ -151,7 +151,23 @@ similarity()
     numerator += s1MultiSet.search(hashForCompare) * s2MultiSet.search(hashForCompare);
 \end{verbatim}
 \subsection{Data Structures}
+Hash string uses an iterable hash table. The iterable is an extension of the base hash table that was created for this 
+assignment. Under the hood the hash table uses an array of LinkedList to store the data. The IterableHashTable has 
+iterator to work over the all entries in the hash table.
 \subsection{Run Time}
+\subsubsection{Constructor}
+The constructor is what creates the shingles and loads up the hash table. The rolling hash calculates the exponent once
+and the running time is assumed to be $O(k)$. Next the rolling hash loops over the string. This loop will run 
+$n-k$ or $m-k$ times. On each iteration of the loop the rolling hash takes $O(k)$. Then the loop adds the item to the union set. It does 
+by calling HashTable.search(Tuple t) which walks though the tuples in the in that list. The worst case would be that 
+will strings ended up in the same row so the worst-case running time would be $O(k)$. If the doesn't find it then it 
+would add it to the union set which would be $O(1)$. Then last action of the is to add to the sMultiSet which is time 
+to find the hash of key and and place in the correct link list which can be effectively called $O(1)$.
+
+Overall, the running time is $(n-k) + (m-k) * (O(k)+O(k)+O(n)+O(1)+O(1))$. We can simplify to $(m-k) + (n-k) * O(1)$. 
+Also since we know that $k < 14$ in our implementation we can say if is effectively $O(m+n)$.   
+\subsubsection{\texttt{vectorLength()}}
+The loop runs for $n-k$ or $m-k$ times.
 \subsection{Similarity Results}
 \section{HashCodeSimilarity}
 \subsection{Pseudo Code}
