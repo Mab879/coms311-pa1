@@ -89,8 +89,6 @@ public class TestSimilarity
         String testString2 = "fdsffksfkeoofsfjadajflkasjaaaaaaaaaaaaaaaaaaaaaaadflkjdsafjalfjsalfjdsljfalsjf";
         BruteForceSimilarity bfs = new BruteForceSimilarity(testString1, testString2, 8);
         HashStringSimilarity hss = new HashStringSimilarity(testString1, testString2, 8);
-        System.out.println(bfs.similarity());
-        System.out.println(hss.similarity());
-        assert (bfs.similarity() == hss.similarity());
+        assertEquals(bfs.similarity(), hss.similarity(), 0.0001);
     }
 }

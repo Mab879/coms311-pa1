@@ -4,7 +4,7 @@
  */
 class RollingHash {
     private final int alpha = 31;
-    private final int alphaToNMinusOne;
+    private final long alphaToNMinusOne;
 
     private int sLength;
     private String s;
@@ -24,7 +24,7 @@ class RollingHash {
         // Initialize instance variables
         this.s = s;
         this.sLength = sLength;
-        alphaToNMinusOne = (int) Math.pow(alpha, sLength - 1);
+        alphaToNMinusOne = (long) Math.pow(alpha, sLength - 1);
     }
 
     Tuple next() {
@@ -55,8 +55,8 @@ class RollingHash {
         // New rolling hash:
         // s[nextShinglePos]*alpha^(n-1) + s[nextShinglePos+1]*alpha(n-2) + ... + s[nextShinglePos+sLength-1]
         return (rollingHash
-                - s.charAt(nextShinglePos - 1) * alphaToNMinusOne)  // Remove s[nextShinglePos-1]*alpha^(n-1)
-                * alpha                                             // Increment all alpha exponents by 1
-                + s.charAt(nextShinglePos + sLength - 1);           // Add s[nextShinglePos+sLength-1]
+                - (int) (s.charAt(nextShinglePos - 1) * alphaToNMinusOne))  // Remove s[nextShinglePos-1]*alpha^(n-1)
+                * alpha                                                     // Increment all alpha exponents by 1
+                + s.charAt(nextShinglePos + sLength - 1);                   // Add s[nextShinglePos+sLength-1]
     }
 }
