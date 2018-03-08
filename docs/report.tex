@@ -10,7 +10,7 @@
 \maketitle
 \section{Hash Table}
 \subsection{Pseudo Code} 
-\subsubsection{add}
+\subsubsection{\texttt{add(Tuple t)}}
 \begin{verbatim}
 add(Tuple t)
    hash = hashFunction.hash(t.key)
@@ -26,7 +26,7 @@ add(Tuple t)
                 hash =  newHashFunction.hash(t.key)
                 newTable[hash].add(t)
 \end{verbatim}
-\subsubsection{search(Tuple t)}
+\subsubsection{\texttt{search(Tuple t)}}
 \begin{verbatim}
 search(Tuple t) 
     count = 0;
@@ -38,16 +38,16 @@ search(Tuple t)
 \end{verbatim}
 \section{BruteForceSimilarity}
 \subsection{Pseudo Code}
-\subsubsection{lengthOfS1}
-\subsubsection{lengthOfS2}
+\subsubsection{\texttt{lengthOfS1()}}
+\subsubsection{\texttt{lengthOfS2()}}
 \subsubsection{similarity}
 \subsection{Data Structures}
-The BruteForceSimilarity uses ArrayList as its primary data structure. It doesn't directly use any arrays. 
+The BruteForceSimilarity uses ArrayList as its primary data structure. It doesn't directly use any arrays.
 \subsection{Run Time}
 \subsection{Similarity Results}
 \section{HashStringSimilarity}
 \subsection{Pseudo Code}
-\subsubsection{lengthOfS1 and lengthOfS2}
+\subsubsection{\texttt{lengthOfS1()} and \texttt{lengthOfS2()}}
 \texttt{s} is the hash table of shingles. \texttt{lengthOfS1} and \texttt{lengthOfS2} will pass the correct HashTable to this method.
 \begin{verbatim}
 vectorLength(IterableHashTable s)
@@ -61,15 +61,15 @@ vectorLength(IterableHashTable s)
             sum += occurrences * occurrences;
     return Math.sqrt(sum)
 \end{verbatim}
-\subsubsection{similarity}
+\subsubsection{\texttt{similarity()}}
 \subsection{Data Structures }
 \subsection{Run Time}
 \subsection{Similarity Results}
 \section{HashCodeSimilarity}
 \subsection{Pseudo Code}
-\subsubsection{lengthOfS1}
-\subsubsection{lengthOfS2}
-\subsubsection{similarity}	
+\subsubsection{\texttt{lengthOfS1()}}
+\subsubsection{\texttt{lengthOfS2()}}
+\subsubsection{\texttt{similarity()}}
 \subsection{Data Structure }
 \subsection{Run Time}
 \section{Similarity Results}
