@@ -14,6 +14,8 @@
 
 /**
  * A key-value mapping from an int to a string.
+ * @author Matthew Burket
+ * @author Joel May
  */
 public class Tuple {
     /**
