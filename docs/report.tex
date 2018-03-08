@@ -48,8 +48,32 @@ lengthOfS1()
 lengthOfS1()
     return vectorLength(shinglesS1)
 \end{verbatim}
-\subsection{\texttt{vectorLength(strings[])}}
+\subsubsection{\texttt{vectorLength(strings[])}}
+\begin{verbatim}
+vectorLength(strings[])
+    sum = 0;
+    alreadyDone[] = {};
+    for each s in strings
+        if !alreadyDone.contains(s)
+            o = strings.count(s)
+            sum += o^2
+            alreadyDone += s
+    return sqrt(sum)
+\end{verbatim}
 \subsubsection{\texttt{similarity()}}
+\begin{verbatim}
+similarity()
+    result[] = {};
+    // Create union
+    for each s in shinglesS1 + shinglesS2
+        if !result.contains(s)
+            result.add(s)
+
+    sum = 0
+    for each s in result
+        sum += shinglesS1.count(s) * shinglesS2.count(s)
+    return sum / (lengthOfS1() * lengthOfS2())
+\end{verbatim}
 \subsection{Data Structures}
 The BruteForceSimilarity uses ArrayList as its primary data structure. It doesn't directly use any arrays.
 \subsection{Run Time}
