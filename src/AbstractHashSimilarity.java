@@ -42,7 +42,8 @@ abstract class AbstractHashSimilarity extends AbstractSimilarity {
     public float similarity() {
         int numerator = 0;
         for (Tuple i : unionSet) {
-            numerator += s1MultiSet.search(i) * s2MultiSet.search(i);
+            Tuple hashForCompare = processSHash(i);
+            numerator += s1MultiSet.search(hashForCompare) * s2MultiSet.search(hashForCompare);
         }
         return (float) numerator / lengthOfS1() / lengthOfS2();
     }
