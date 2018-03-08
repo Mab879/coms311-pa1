@@ -110,14 +110,41 @@ similarity()
         numerator += s1MultiSet.search(i) * s2MultiSet.search(i)
     numerator += s1MultiSet.search(hashForCompare) * s2MultiSet.search(hashForCompare);
 \end{verbatim}
-\subsection{Data Structures }
+\subsection{Data Structures}
 \subsection{Run Time}
 \subsection{Similarity Results}
 \section{HashCodeSimilarity}
 \subsection{Pseudo Code}
 \subsubsection{\texttt{lengthOfS1()}}
+\begin{verbatim}
+vectorLength(s1MultiSet)
+\end{verbatim}
 \subsubsection{\texttt{lengthOfS2()}}
+\begin{verbatim}
+vectorLength(s2MultiSet)
+\end{verbatim}
+\subsubsection{\texttt{vectorLength(IterableHashTable s)}}
+\begin{verbatim}
+vectorLength(IterableHashTable s)
+    HashTable countedValues = HashTable(13)
+    sum = 0
+    for Tuple i in S
+        Tuple hashForCompare = t;
+        if (countedValues.search(t) == 0)
+            countedValues.add(hashForCompare);
+            occurrences = S.search(hashForCompare);
+            sum += occurrences * occurrences;
+    return Math.sqrt(sum)
+\end{verbatim}
 \subsubsection{\texttt{similarity()}}
+\begin{verbatim}
+similarity()
+    numerator = 0;
+    // unionSet that was created before in the constructor
+    for (Tuple i : unionSet)
+        numerator += s1MultiSet.search(i) * s2MultiSet.search(i)
+    numerator += s1MultiSet.search(hashForCompare) * s2MultiSet.search(hashForCompare);
+\end{verbatim}
 \subsection{Data Structure }
 \subsection{Run Time}
 \section{Similarity Results}
