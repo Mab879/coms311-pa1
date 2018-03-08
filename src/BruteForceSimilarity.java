@@ -50,25 +50,54 @@ public class BruteForceSimilarity extends AbstractSimilarity {
 
     @Override
     public float lengthOfS1() {
-        int sum = 0;
-        for (String s : shinglesS1) {
-            sum += countOccurances(shinglesS1, s);
-        }
-        return (float) Math.sqrt(sum);
+        return vectorLength(shinglesS1);
     }
 
     @Override
     public float lengthOfS2() {
+        return vectorLength(shinglesS2);
+    }
+
+    /**
+     * Calculates the vector length
+     *
+     * @param strings input strings
+     * @return vector length of strings
+     */
+    private float vectorLength(ArrayList<String> strings) {
         int sum = 0;
-        for (String s : shinglesS2) {
-            sum += countOccurances(shinglesS2, s);
+        ArrayList<String> alreadyDone = new ArrayList<>();
+        for (String s : strings) {
+            if (alreadyDone.contains(s)) {
+                continue;
+            }
+            int o = countOccurrences(strings, s);
+            sum += o * o;
+            alreadyDone.add(s);
         }
         return (float) Math.sqrt(sum);
     }
 
     @Override
     public float similarity() {
-        throw new UnsupportedOperationException();
+        ArrayList<String> result = new ArrayList<>();
+        for (String s : shinglesS1) {
+            if (!result.contains(s)) {
+                result.add(s);
+            }
+        }
+
+        for (String s : shinglesS1) {
+            if (!result.contains(s)) {
+                result.add(s);
+            }
+        }
+
+        int sum = 0;
+        for (String s : result) {
+            sum += countOccurrences(shinglesS1, s) * countOccurrences(shinglesS2, s);
+        }
+        return (float) sum / (lengthOfS1() * lengthOfS2());
     }
 
     /**
@@ -79,14 +108,14 @@ public class BruteForceSimilarity extends AbstractSimilarity {
      */
     private ArrayList<String> shingleString(String s) {
         ArrayList<String> result = new ArrayList<>();
-        for (int i = 1; i < s.length() - sLength; i++) {
-            result.add(s.substring(i, sLength));
+        for (int i = 0; i < s.length() - sLength + 1; i++) {
+            result.add(s.substring(i, i + sLength));
         }
         return result;
     }
 
 
-    private static int countOccurances(ArrayList<String> strings, String s) {
+    private static int countOccurrences(ArrayList<String> strings, String s) {
         int result = 0;
         for (String string : strings) {
             if (string.equals(s)) {
