@@ -152,8 +152,8 @@ similarity()
 \end{verbatim}
 \subsection{Data Structures}
 Hash string uses an iterable hash table. The iterable is an extension of the base hash table that was created for this
-assignment. Under the hood the hash table uses an array of LinkedList to store the data. The IterableHashTable has 
-iterator to work over the all entries in the hash table.
+assignment. Under the hood the hash table uses an array of LinkedList to store the data. The IterableHashTable stores
+a copy of all elements in a List to allow iteration over the elements.
 \subsection{Run Time}
 \subsubsection{Constructor}
 The constructor creates shingles. First the construstor calcuates
@@ -207,7 +207,10 @@ similarity()
         numerator += s1MultiSet.search(i) * s2MultiSet.search(i)
     numerator += s1MultiSet.search(hashForCompare) * s2MultiSet.search(hashForCompare);
 \end{verbatim}
-\subsection{Data Structure }
+\subsection{Data Structures}
+\texttt{HashCodeSimilarity} uses an iterable hash table. The iterable is an extension of the base hash table that was
+created for this assignment. Under the hood the hash table uses an array of LinkedList to store the data. The
+IterableHashTable stores a copy of all elements in a List to allow iteration over the elements.
 \subsection{Run Time}
 \section{Similarity Results}
 \section{Similarity Equality}
