@@ -75,8 +75,29 @@ similarity()
     return sum / (lengthOfS1() * lengthOfS2())
 \end{verbatim}
 \subsection{Data Structures}
-The BruteForceSimilarity uses ArrayList as its primary data structure. It doesn't directly use any arrays.
+The BruteForceSimilarity uses \texttt{ArrayList} as its primary data structure. It doesn't directly use any arrays.
 \subsection{Run Time}
+\subsubsection{Constructor}
+The constructor creates shingles. The \texttt{for} loop executes $n-k$ and $m-k$ times.
+The body of the loop uses \texttt{String.substring()}, which is $O(k)$.
+The body also adds the new string to an \texttt{ArrayList}, which $O(1)$.
+Thus, the run time is $((n-k)+(m-k))*(O(k)+O(1))=(n+m-2k)*O(k)=O(nk+mk+k^2)$.
+Since $k$ is bounded to be small ($k<14$ in our implementation), the run time is
+effectively $O(n+m)$.
+\subsubsection{\texttt{vectorLength()}}
+The \texttt{for} loop iterates $n-k$ or $m-k$ (the number of shingles).
+In the worst case, the body of the \texttt{if} statement always executes.
+The \texttt{strings.count()} method iterates through the list of shingles, $n-k$ or $m-k$.
+For each shingle, it does a $O(k)$ comparison. Thus, \texttt{count()} costs
+$(n-k)*O(k)$ or $(m-k)*O(k)$. The other two instructions, squaring, adding,
+and inserting to an \texttt{ArrayList}, in the \texttt{if} body take $O(1)$.
+
+Overall, $(n-k)*((n-k)*O(k)+O(1))$ or $(m-k)*((m-k)*O(k)+O(1))$. Simplifies to
+$O(n-k)*O(nk-k^2)$ or $O(m-k)*O(mk-k^2)$, then $O(n^2k-nk^2+k^3)$ or
+$O(m^2k-mk^2+k^3)$.  Since $k$ is bounded to be small ($k<14$ in our
+implementation), it may be treated like a constant, which means the run time is
+in effect $O(n^2)$ or $O(m^2)$.
+\subsubsection{\texttt{similarity()}}
 \subsection{Similarity Results}
 \section{HashStringSimilarity}
 \subsection{Pseudo Code}
