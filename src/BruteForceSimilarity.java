@@ -68,11 +68,13 @@ public class BruteForceSimilarity extends AbstractSimilarity {
         int sum = 0;
         ArrayList<String> alreadyDone = new ArrayList<>();
         for (String s : strings) {
+            // If we have already done this string, skip it
             if (alreadyDone.contains(s)) {
                 continue;
             }
             int o = countOccurrences(strings, s);
-            sum += o * o;
+            sum += o * o;  // squaring
+            // Remember that we did this string
             alreadyDone.add(s);
         }
         return (float) Math.sqrt(sum);
@@ -81,6 +83,7 @@ public class BruteForceSimilarity extends AbstractSimilarity {
     @Override
     public float similarity() {
         ArrayList<String> result = new ArrayList<>();
+        // Creating Union
         for (String s : shinglesS1) {
             if (!result.contains(s)) {
                 result.add(s);
@@ -93,10 +96,12 @@ public class BruteForceSimilarity extends AbstractSimilarity {
             }
         }
 
+        // Sum i∈U i f(S_1, i) + f(S_2, i)
         int sum = 0;
         for (String s : result) {
             sum += countOccurrences(shinglesS1, s) * countOccurrences(shinglesS2, s);
         }
+        // Final Similarity
         return (float) sum / (lengthOfS1() * lengthOfS2());
     }
 
