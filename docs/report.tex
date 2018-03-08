@@ -11,7 +11,31 @@
 \section{Hash Table}
 \subsection{Pseudo Code} 
 \subsubsection{add}
+\begin{verbatim}
+add(Tuple t)
+   hash = hashFunction.hash(t.key)
+    if table[hash] == null
+        table[hash] = new LinkedList();
+    table[hash].add(t)
+    if (loadFactor() > 0.7) 
+        newSize = getPrime(size() * 2)
+        newTable = LinkedList[newSize]
+        newHashFunction = new hashFunction(newSize)
+        for list in table
+            for tuple in list
+                hash =  newHashFunction.hash(t.key)
+                newTable[hash].add(t)
+\end{verbatim}
 \subsubsection{search(Tuple t)}
+\begin{verbatim}
+search(Tuple t) 
+    count = 0;
+    hash = hashFunction.hash(t.key)
+    for Tuple loopTuple in table[hash]
+        if (loopTuple.equals(t))
+            count++
+    return count
+\end{verbatim}
 \section{BruteForceSimilarity}
 \subsection{Pseudo Code}
 \subsubsection{lengthOfS1}
