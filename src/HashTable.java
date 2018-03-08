@@ -17,14 +17,25 @@ import java.util.LinkedList;
 
 public class HashTable {
     // member fields and other member methods
-    /** The Hash function to use */
+    /**
+     * The Hash function to use
+     */
     private HashFunction hashFunction;
-    /** Size of the hashtable */
+    /**
+     * Size of the hashtable
+     */
     private int size;
-    /** This is the data structure  */
+    /**
+     * This is the data structure
+     */
     private LinkedList<Tuple>[] table;
-    /** Total number of elements */
+    /**
+     * Total number of elements
+     */
     private int totalElements;
+    /**
+     * Number of lists that have been initialized
+     **/
     private int numInitLists;
 
     /**
@@ -155,17 +166,17 @@ public class HashTable {
      * @return the number of occurrences of the tuple
      */
     public int search(Tuple t) {
-       int hash = hashFunction.hash(t.getKey());
-       if (table[hash] == null) {
-           return 0;
-       }
-       int count = 0;
-       for (Tuple loopTuple : table[hash]) {
-           if (loopTuple.equals(t)) {
-               count++;
-           }
-       }
-       return count;
+        int hash = hashFunction.hash(t.getKey());
+        if (table[hash] == null) {
+            return 0;
+        }
+        int count = 0;
+        for (Tuple loopTuple : table[hash]) {
+            if (loopTuple.equals(t)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
@@ -174,20 +185,20 @@ public class HashTable {
      * @param t the tuple to remove
      */
     public void remove(Tuple t) {
-       int hash = hashFunction.hash(t.getKey());
-       if (table[hash] == null) {
-           return;
-       }
-       for (Tuple loopT : table[hash]) {
-           if (loopT.equals(t)) {
-               table[hash].removeFirstOccurrence(loopT);
-               totalElements--;
-           }
-       }
-       if (table[hash].size() <= 0) {
-           table[hash] = null;
-           numInitLists--;
-       }
+        int hash = hashFunction.hash(t.getKey());
+        if (table[hash] == null) {
+            return;
+        }
+        for (Tuple loopT : table[hash]) {
+            if (loopT.equals(t)) {
+                table[hash].removeFirstOccurrence(loopT);
+                totalElements--;
+            }
+        }
+        if (table[hash].size() <= 0) {
+            table[hash] = null;
+            numInitLists--;
+        }
     }
 
     /**
