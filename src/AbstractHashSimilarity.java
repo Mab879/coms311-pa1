@@ -3,14 +3,12 @@
  * @author Joel May
  */
 abstract class AbstractHashSimilarity extends AbstractSimilarity {
-    /** A hash table for the shingles of s1. */ // A random guess at a good initial size.
-    private HashTable s1HT = new HashTable(10);
-    /** An iterable array of Tuples in s1HT. */
-    private Tuple[] s1Arr;
-    /** A hash table for the shingles of s2. */ // A random guess at a good initial size.
-    private HashTable s2HT = new HashTable(10);
-    /** An iterable array of Tuples in s2HT. */
-    private Tuple[] s2Arr;
+    /** An iterable array of shingles in s1's multi-set. */
+    private IterableHashTable s1MultiSet = new IterableHashTable(13);
+    /** An iterable array of shingles in s2's multi-set. */
+    private IterableHashTable s2MultiSet = new IterableHashTable(13);
+    /** An iterable array of the de-duped union of s1's and s2's multi-sets. */
+    private IterableHashTable unionSet;
 
     /**
      * Constructor to initialize the values.
@@ -21,77 +19,65 @@ abstract class AbstractHashSimilarity extends AbstractSimilarity {
      */
     protected AbstractHashSimilarity(String s1, String s2, int sLength) {
         super(sLength);
-        s1Arr = loadHashes(s1, sLength, s1HT);
-        s2Arr = loadHashes(s2, sLength, s2HT);
+
+        // The union array is upper bounded by this equation.
+        int unionUpperBound = s1.length() + s2.length() - 2 * sLength;
+        unionSet = new IterableHashTable(unionUpperBound);
+
+        loadHashes(s1, sLength, s1MultiSet);
+        loadHashes(s2, sLength, s2MultiSet);
     }
 
     @Override
     public float lengthOfS1() {
-        return vectorLength(s1Arr, s1HT);
+        return vectorLength(s1MultiSet);
     }
 
     @Override
     public float lengthOfS2() {
-        return vectorLength(s2Arr, s2HT);
+        return vectorLength(s2MultiSet);
     }
 
     @Override
     public float similarity() {
-        throw new UnsupportedOperationException();
-        // implementation
+        int numerator = 0;
+        for (Tuple i : unionSet) {
+            numerator += countOccurrencesInS(i, s1MultiSet) * countOccurrencesInS(i, s2MultiSet);
+        }
+        return (float) numerator / lengthOfS1() / lengthOfS2();
     }
 
-    private static float vectorLength(Tuple[] s1Arr, HashTable s1HT) {
+    private float vectorLength(IterableHashTable S) {
         int sum = 0;
-        for (Tuple t : s1Arr) {
-            sum += (countOccurrences(t.getValue(), s1HT)) ^ 2;
+        for (Tuple i : S) {
+            sum += (countOccurrencesInS(i, S)) ^ 2;
         }
         return (float) Math.sqrt(sum);
     }
 
-    private static int countOccurrences(String s, HashTable ht) {
-        Tuple search = new Tuple(s.hashCode(), s);
+    private int countOccurrencesInS(Tuple i, HashTable ht) {
+        Tuple search = processSHash(i);
         return ht.search(search);
     }
 
-    private Tuple[] loadHashes(String s, int sLength, HashTable ht) {
-        final int alpha = 31;
-        final int alphaToNMinusOne = alpha ^ (sLength - 1);
-
-        // Stores an iterable array
-        Tuple[] out = new Tuple[s.length() - sLength + 1];
-        int outIndex = 0;
-
-        String shingle;
-        int rollingHash;
-        Tuple shingleTuple;
-
-        // Seed the initial hash
-        shingle = s.substring(0, sLength);
-        rollingHash = shingle.hashCode();
-        shingleTuple = createTuple(rollingHash, shingle);
-        // Add the initial hash
-        ht.add(shingleTuple);
-        out[outIndex++] = shingleTuple;
-
-        // Calculate other hashes by rolling
-        for (int i = 1; i < s.length() - sLength; i++) {
-            // Move string window.  O(sLength)
-            shingle = s.substring(i, sLength);
-            // Move hash window.  O(1)
-            rollingHash -= s.charAt(i - 1) * alphaToNMinusOne;
-            rollingHash *= alpha;
-            rollingHash += s.charAt(i + sLength - 1);
-
-            assert rollingHash == shingle.hashCode();
-            // Add to the table
-            shingleTuple = createTuple(rollingHash, shingle);
-            ht.add(shingleTuple);
-            out[outIndex++] = shingleTuple;
+    private void addUnionHash(Tuple t) {
+        if (unionSet.search(t) == 0) {
+            unionSet.add(t);
         }
-
-        return out;
     }
 
-    protected abstract Tuple createTuple(int hash, String s);
+    private void loadHashes(String s, int sLength, HashTable sMultiSet) {
+        RollingHash rh = new RollingHash(s, sLength);
+
+        while (rh.hasNext()) {
+            // Calculate a hash with its string
+            Tuple hashTuple = rh.next();
+            // Store the hash in the union, if it doesn't exist.
+            addUnionHash(hashTuple);
+            // Store the hash in the multi-set
+            sMultiSet.add(processSHash(hashTuple));
+        }
+    }
+
+    protected abstract Tuple processSHash(Tuple t);
 }

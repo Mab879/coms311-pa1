@@ -8,7 +8,8 @@
 //  (i.e., you may include java.util.ArrayList etc. here, but not junit, apache commons, google guava, etc.)
 
 /**
- * @author Hugh Potter
+ * @author Matthew Burket
+ * @author Joel May
  */
 
 public class HashStringSimilarity extends AbstractHashSimilarity {
@@ -24,7 +25,7 @@ public class HashStringSimilarity extends AbstractHashSimilarity {
     }
 
     @Override
-    protected Tuple createTuple(int hash, String s) {
-        return new Tuple(hash, s);
+    protected Tuple processSHash(Tuple t) {
+        return t;
     }
 }

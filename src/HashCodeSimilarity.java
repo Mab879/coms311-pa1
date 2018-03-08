@@ -25,7 +25,8 @@ public class HashCodeSimilarity extends AbstractHashSimilarity {
     }
 
     @Override
-    protected Tuple createTuple(int hash, String s) {
-        return new Tuple(hash, null);
+    protected Tuple processSHash(Tuple t) {
+        // The key (hash) is the only important part to use for comparisons.
+        return new Tuple(t.getKey(), null);
     }
 }
