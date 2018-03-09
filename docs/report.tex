@@ -174,8 +174,9 @@ Simplified, $O(m + n - k) + [O(n-k) + O(m-k)] * O(k)$.
 Simplify, $O(m + n - k) + [O(nk-k^2) + O(km-k^2)])$. We assume that $k$ is bounded is $k < 14$. So it comes a constant.
 Thus $O(m + n) + [O(n) + O(m)]$ and simplify $O(m + n)$.
 \subsubsection{\texttt{vectorLength()}}
-The loop runs for $n-k$ plus $m-k$ times. Each iteration of the loop calls \texttt{search(Tuple T)} to check if the given shingle has been done before. As discussed in the constructor section that takes $O(k) + O(1)$. Next, we found the number of times the shingle occurs in $n$ or $m$ using $ \texttt{search(Tuple T)}$  which will take $O(k) + O(1)$. Then the count is square by multiplying by itself which which done in $O(1)$. Then add the squared count to total sum which is $O(1)$. Then after all the iterations take the square root of count. Since we
-assume that multiplication takes $O(1)$ we assume that the square root will take $O(1)$. 
+The loop runs for $n-k$ or $m-k$ times. Each iteration of the loop calls \texttt{search(Tuple T)} to check if the given shingle has been done before. As discussed in the constructor section, that takes $O(k) + O(1)$. Assuming the worst case, the \texttt{if} body always executes. Next, we found the number of times the shingle occurs in $n$ or $m$ using $ \texttt{search(Tuple T)}$, which will take $O(k) + O(1)$. Then the count is square by multiplying by itself, which is done in $O(1)$. Then add the squared count to total sum which is $O(1)$. Then after all the iterations take the square root of count. Since we assume that multiplication takes $O(1)$, we assume that the square root will take $O(1)$ (through lookup tables in the CPU or JVM).
+
+This becomes $(n-k)*(O(k)+O(1)+O(k)+O(1))$. Simplifies to $(n-k)*O(k)$. Then to $O(nk-k^2)$. Assuming $k$ is bounded to be small ($k<14$ in our implementation), it may be treated like a constant, which results in $O(n)$ or $O(m)$ (for \texttt{lengthOfS1()} and \texttt{lengthOfS2()}, respectively).
 \subsubsection{\texttt{similarity()}}
 The loop runs for in the worst $n-k$ plus $m-k$ times. This assume that both documents are completely different. Next it calls \texttt{search(Tuple T)} on each multi-set. Each will take $O(k) + O(1)$ time. Then it multiplies the results of the calls to \texttt{search(Tuple T)} and adds to the sum, both take $O(1)$.
 

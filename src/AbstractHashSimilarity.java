@@ -48,15 +48,18 @@ abstract class AbstractHashSimilarity extends AbstractSimilarity {
         return (float) numerator / lengthOfS1() / lengthOfS2();
     }
 
+    // Overall: O(s1.length * k - k^2) (or replace s1 with s2)
     private float vectorLength(IterableHashTable S) {
-        HashTable countedValues = new HashTable(13);
+        HashTable countedValues = new HashTable(13); // O(1)
         int sum = 0;
-        for (Tuple i : S) {
-            Tuple hashForCompare = processSHash(i);
-            if (countedValues.search(hashForCompare) == 0) {
-                countedValues.add(hashForCompare);
-                int occurrences = S.search(hashForCompare);
-                sum += occurrences * occurrences; // occurrences squared
+        for (Tuple i : S) { // O(S.size), which is O(s1.length - k)
+            Tuple hashForCompare = processSHash(i); // O(1)
+            if (countedValues.search(hashForCompare) == 0) { // O(k) when hashForCompare has a string;
+                                                             // O(1) when hashForCompare is null
+                countedValues.add(hashForCompare); // O(1)
+                int occurrences = S.search(hashForCompare); // O(k) when hashForCompare has a string;
+                                                            // O(1) when hashForCompare is null
+                sum += occurrences * occurrences; // occurrences squared; O(1)
             }
         }
         return (float) Math.sqrt(sum);
