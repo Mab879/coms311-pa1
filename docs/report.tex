@@ -241,6 +241,19 @@ After the loop the program the divides the sum by \texttt{vectorLength(n)} which
 
 This becomes $(n+m-2k)*(O(1)+O(1))+O(n-k)+O(m-k)+O(1)$. Simplifies to $O(n+m-k)+O(n-k)+O(m-k)$. Even further, to $O(n+m-k)$. Assuming $k$ is bounded to be small ($k<14$ in our implementation), it may be treated as a constant. Thus the run time is in effect $O(n+m)$.
 \section{Similarity Results}
+\begin{verbatim}
+Testing class   class BruteForceSimilarity
+Similarity:     0.41104364
+Running time:   71.0169
+
+Testing class   class HashStringSimilarity
+Similarity:     0.41104364
+Running time:   0.1324
+
+Testing class   class HashCodeSimilarity
+Similarity:     0.41113377
+Running time:   0.1175
+\end{verbatim}
 \section{Similarity Equality}
 The \texttt{BruteForceSimilarity} and \texttt{HashStringSimilarity} produce the
 same results. The former two may output different results from

@@ -17,6 +17,9 @@ import java.util.LinkedList;
 
 public class HashTable {
     // member fields and other member methods
+    // todo document
+    private int distinctElements = 0;
+
     /**
      * The Hash function to use
      */
@@ -99,17 +102,21 @@ public class HashTable {
      * @return the number of *distinct* tuples in the hash table
      */
     public int numElements() {
-        ArrayList<Tuple> nonDups = new ArrayList<>();
-        for (LinkedList<Tuple> l : table) {
-            if (l != null) {
-                for (Tuple t : l) {
-                    if (!nonDups.contains(t)) {
-                        nonDups.add(t);
-                    }
-                }
-            }
-        }
-        return nonDups.size();
+        return distinctElements;
+//        int size = 0;
+//        ArrayList<Tuple> nonDups = new ArrayList<>();
+//        for (LinkedList<Tuple> l : table) {
+//            if (l != null) {
+//                for (Tuple t : l) {
+//                    if (!nonDups.contains(t)) {
+//                        nonDups.add(t);
+//                    }
+//                }
+//                size += nonDups.size();
+//                nonDups.clear();
+//            }
+//        }
+//        return size;
     }
 
     /**
@@ -132,6 +139,9 @@ public class HashTable {
         if (table[hash] == null) {
             table[hash] = new LinkedList<>();
             numInitLists++;
+        }
+        if (search(t) == 0) {
+            distinctElements++;
         }
         table[hash].add(t);
         if (loadFactor() >= 0.7) {
@@ -191,13 +201,21 @@ public class HashTable {
         }
         for (Tuple loopT : table[hash]) {
             if (loopT.equals(t)) {
+                // Remove the element
                 table[hash].removeFirstOccurrence(loopT);
                 totalElements--;
+                // Removed linked list if it's now empty.
+                if (table[hash].size() <= 0) {
+                    table[hash] = null;
+                    numInitLists--;
+                }
+                // Decrement the distinct elements, if this was a unique element.
+                if (search(t) == 0) {
+                    distinctElements--;
+                }
+                // Don't tell Djikstra
+                return;
             }
-        }
-        if (table[hash].size() <= 0) {
-            table[hash] = null;
-            numInitLists--;
         }
     }
 
