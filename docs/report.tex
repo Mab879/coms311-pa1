@@ -13,18 +13,16 @@
 \subsubsection{\texttt{add(Tuple t)}}
 \begin{verbatim}
 add(Tuple t)
-   hash = hashFunction.hash(t.key)
+    totalElements++
+    hash = hash(t.getKey())
     if table[hash] == null
-        table[hash] = new LinkedList();
+        table[hash] = new LinkedList<>()
+        numInitLists++;
+    if search(t) == 0
+        distinctElements++
     table[hash].add(t)
-    if (loadFactor() > 0.7) 
-        newSize = getPrime(size() * 2)
-        newTable = LinkedList[newSize]
-        newHashFunction = new hashFunction(newSize)
-        for list in table
-            for tuple in list
-                hash =  newHashFunction.hash(t.key)
-                newTable[hash].add(t)
+    if loadFactor() >= 0.7
+        rehash()
 \end{verbatim}
 \subsubsection{\texttt{search(Tuple t)}}
 \begin{verbatim}
@@ -36,6 +34,11 @@ search(Tuple t)
             count++
     return count
 \end{verbatim}
+\subsection{Run Time}
+\subsubsection{\texttt{add(Tuple t)}}
+Everything is $O(1)$ except \texttt{search(t)}, which is $O(k)$, except when \texttt{t.getValue()==null}, then it is $O(1)$. The \texttt{rehash()} is infrequent and gets ignored when ammoratized. So the overall run time is $O(k)$ or $O(1)$ (for \texttt{HashCodeSimilarity}).
+\subsubsection{\texttt{search(Tuple t)}}
+The hash function is $O(1)$. The \texttt{for} loop iterates through the linked list; assuming a perfect hash function, the evenly loaded table will have linked lists that consist of 1 element. Which means it iterates $1$ time. The \texttt{if} statement take $O(k)$ time (unless \texttt{k.getValue()==null}, then $O(1)$). So the overall run time is $O(k)$ or $O(1)$ (for \texttt{HashCodeSimilarity}).
 \section{BruteForceSimilarity}
 \subsection{Pseudo Code}
 \subsubsection{\texttt{lengthOfS1()}}
@@ -254,6 +257,10 @@ Testing class   class HashCodeSimilarity
 Similarity:     0.41113377
 Running time:   0.1175
 \end{verbatim}
+\section{Compare Runtimes}
+The slowest is brute force. The fastest is hash code. The hash string and hash code have similar run times, but they are vastly different than brute force. The run times of the two hash methods are expected to be similar with our estimated effective worst case run times of $O(n+m)$ of both classes. The estimated worst case run times are slightly different at $O(nk+mk-k^2)$ and $O(n+m-k)$, due to not comparing the $k$ length string. The time spent comparing the 8-character string is much smaller than the $n$ and $m$ values.
+
+The brute force run time is expected to be vastly larger with an effective worst case run time of $O(n^2+m^2)$. Again, factoring in the 8-character $k$ string comparisons become negligible. The squared run times grow much faster than the other linear run times.
 \section{Similarity Equality}
 The \texttt{BruteForceSimilarity} and \texttt{HashStringSimilarity} produce the
 same results. The former two may output different results from

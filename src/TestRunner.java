@@ -1,5 +1,9 @@
 import java.io.*;
 
+/**
+ * @author Matthew Burket
+ * @author Joel May
+ */
 public class TestRunner {
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
         String shak1 = getProcessedFile("shak1.txt");
