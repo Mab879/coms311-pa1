@@ -178,10 +178,12 @@ The loop runs for $n-k$ or $m-k$ times. Each iteration of the loop calls \texttt
 
 This becomes $(n-k)*(O(k)+O(1)+O(k)+O(1))$. Simplifies to $(n-k)*O(k)$. Then to $O(nk-k^2)$. Assuming $k$ is bounded to be small ($k<14$ in our implementation), it may be treated like a constant, which results in $O(n)$ or $O(m)$ (for \texttt{lengthOfS1()} and \texttt{lengthOfS2()}, respectively).
 \subsubsection{\texttt{similarity()}}
-The loop runs for in the worst $n-k$ plus $m-k$ times. This assume that both documents are completely different. Next it calls \texttt{search(Tuple T)} on each multi-set. Each will take $O(k) + O(1)$ time. Then it multiplies the results of the calls to \texttt{search(Tuple T)} and adds to the sum, both take $O(1)$.
+The loop runs for in the worst $n-k$ plus $m-k$ times. This assumes that both documents are completely different. Next, it calls \texttt{search(Tuple T)} on each multi-set. Each will take $O(k) + O(1)$ time. Then it multiplies the results of the calls to \texttt{search(Tuple T)} and adds to the sum, both take $O(1)$.
 
-After the loop the program the divides the sum by \texttt{vectorLength(m)} which takes NUMBER FOR VECTOR plus $O(1)$ for the divide. Then that total is divided by \texttt{vectorLength(n)} which also takes NUMBER FOR VECTOR plus $O(1)$.
- \subsection{Similarity Results}
+After the loop the program the divides the sum by \texttt{vectorLength(m)} which takes $O(nk-k^2)$ plus $O(1)$ for the divide. Then that total is divided by \texttt{vectorLength(n)} which also takes $O(mk-k^2)$ plus $O(1)$.
+
+This becomes $(n+m-2k)*(O(k)+O(1))+O(nk-k^2)+O(mk-k^2)+O(1)$. Simplifies to $(n+m-2k)*O(k)+O(nk-k^2)+O(mk-k^2)$. Simplifies further to $O(nk+mk-k^2)+O(nk-k^2)+O(mk-k^2)$. Even further, to $O(nk+mk-k^2)$. Assuming $k$ is bounded to be small ($k<14$ in our implementation), it may be treated as a constant. Thus the run time is in effect $O(n+m)$.
+\subsection{Similarity Results}
 \section{HashCodeSimilarity}
 \subsection{Pseudo Code}
 \subsubsection{\texttt{lengthOfS1()}}

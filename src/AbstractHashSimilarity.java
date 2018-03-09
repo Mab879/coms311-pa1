@@ -38,14 +38,17 @@ abstract class AbstractHashSimilarity extends AbstractSimilarity {
         return vectorLength(s2MultiSet);
     }
 
+    // Overall: O(nk + mk - k^2)
     @Override
     public float similarity() {
         int numerator = 0;
-        for (Tuple i : unionSet) {
-            Tuple hashForCompare = processSHash(i);
-            numerator += s1MultiSet.search(hashForCompare) * s2MultiSet.search(hashForCompare);
+        for (Tuple i : unionSet) { // O(n + m - k)
+            Tuple hashForCompare = processSHash(i); // O(1)
+            numerator += s1MultiSet.search(hashForCompare) // O(k)
+                    * s2MultiSet.search(hashForCompare);   // O(k)
         }
-        return (float) numerator / lengthOfS1() / lengthOfS2();
+        return (float) numerator / lengthOfS1() // O(nk-k^2)
+                / lengthOfS2();                 // O(mk-k^2)
     }
 
     // Overall: O(s1.length * k - k^2) (or replace s1 with s2)
