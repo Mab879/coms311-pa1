@@ -156,23 +156,18 @@ assignment. Under the hood the hash table uses an array of LinkedList to store t
 a copy of all elements in a List to allow iteration over the elements.
 \subsection{Run Time}
 \subsubsection{Constructor}
-The constructor creates shingles. First the constructor calculates the upper bound by using multiplication, subtractions, and addition. We can use the formula $m + n -2 * k$ or this.
-Next the constructor for the HashTable and the HashFunction need to find a prime for the size. Using Bertrand's postulate we know that number. So in the worst case it will take
- $O(2[m + n -2 * k])$ to find the next prime. Next the constructor loads up the hash tables.
+The constructor creates shingles. First the constructor calculates the upper bound by using multiplication, subtractions, and addition. We use the formula $m+n-2k$, which is $O(1)$.
+Next we call the constructor for the HashTable and the HashFunction need to find a prime for the size. We use Bertrand's Postulate to calculate the run time to find the prime. So in the worst case it will take $O(m+n-k)$ to find the next prime.
 
 Next, we are now in the constructor for the RollingHash. The main thing the constructor does is
-calculates the alphaToNMinusOne which takes $O(log(k))$ time.
+calculates the alphaToNMinusOne which takes $O(log(k))$ time because we assume \texttt{Math.pow} runs in $O(log(k))$.
 
-Next, the step of loading the hashes is working on creating the shingles. The \texttt{for} loop executes $n-k$ or $m-k$ 
-times. In the loop the rolling hash is calculated which takes $O(1)$ also takes $O(k)$ to copy the string. Then the 
-loop tries to add to the union set. It does this by calling search. Search will find the spot where tuple should be. 
-Since we are assume that hash function is perfect it should take $O(k) + O(1)$. Next we, assume that it doesn't exist and 
-thus we will need to add with $O(1)$ to  the hash table. Next we will add to the multi-set which will take $O(1)$. 
+Next, the step of loading the hashes is working on creating the shingles. The \texttt{for} loop executes $n-k$ or $m-k$ times. In the loop the rolling hash is calculated, which takes $O(1)$ and also takes $O(k)$ to copy the string. Then the loop tries to add to the union set, but checks with \texttt{search(Tuple t)} to disallow duplicates. Since we are assume that hash function is perfect, it should take $O(k) + O(1)$. Next, we assume that it doesn't exist in the union set and thus we will need to add with $O(1)$ to the hash table. Next, we will add to the multi-set which will take $O(1)$. 
 
-Overall, $2 * O(m + n - k) + O(1) + [(n-k) + (m-k)] * [O(1) + O(k) + O(1) + O(1) + O(1)]$. 
-Simplified, $O(m + n - k) + [O(n-k) + O(m-k)] * O(k)$. 
-Simplify, $O(m + n - k) + [O(nk-k^2) + O(km-k^2)])$. We assume that $k$ is bounded is $k < 14$. So it comes a constant.
-Thus $O(m + n) + [O(n) + O(m)]$ and simplify $O(m + n)$.
+Overall, $2*O(m+n-k)+O(1)+2*O(log(k))+((n-k)+(m-k))*(O(k)+O(k)+O(1))$. 
+Simplified, $O(m+n-k)+O(log(k))+(O(n+m-k))*O(k)$. 
+Simplify, $O(m+n-k)+O(log(k))+(O(nk+mk-k^2))$. We assume that $k$ is bounded is $k<14$. So it may be assumed as constant.
+Thus $O(m+n)+(O(n)+O(m))$ and simplify $O(m+n)$.
 \subsubsection{\texttt{vectorLength()}}
 The loop runs for $n-k$ or $m-k$ times. Each iteration of the loop calls \texttt{search(Tuple T)} to check if the given shingle has been done before. As discussed in the constructor section, that takes $O(k) + O(1)$. Assuming the worst case, the \texttt{if} body always executes. Next, we found the number of times the shingle occurs in $n$ or $m$ using $ \texttt{search(Tuple T)}$, which will take $O(k) + O(1)$. Then the count is square by multiplying by itself, which is done in $O(1)$. Then add the squared count to total sum which is $O(1)$. Then after all the iterations take the square root of count. Since we assume that multiplication takes $O(1)$, we assume that the square root will take $O(1)$ (through lookup tables in the CPU or JVM).
 
@@ -183,7 +178,6 @@ The loop runs for in the worst $n-k$ plus $m-k$ times. This assumes that both do
 After the loop the program the divides the sum by \texttt{vectorLength(m)} which takes $O(nk-k^2)$ plus $O(1)$ for the divide. Then that total is divided by \texttt{vectorLength(n)} which also takes $O(mk-k^2)$ plus $O(1)$.
 
 This becomes $(n+m-2k)*(O(k)+O(1))+O(nk-k^2)+O(mk-k^2)+O(1)$. Simplifies to $(n+m-2k)*O(k)+O(nk-k^2)+O(mk-k^2)$. Simplifies further to $O(nk+mk-k^2)+O(nk-k^2)+O(mk-k^2)$. Even further, to $O(nk+mk-k^2)$. Assuming $k$ is bounded to be small ($k<14$ in our implementation), it may be treated as a constant. Thus the run time is in effect $O(n+m)$.
-\subsection{Similarity Results}
 \section{HashCodeSimilarity}
 \subsection{Pseudo Code}
 \subsubsection{\texttt{lengthOfS1()}}

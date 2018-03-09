@@ -12,19 +12,20 @@ class RollingHash {
     private int nextShinglePos = 0;
     private int rollingHash;
 
+    // Overall: O(log(k))
     RollingHash(String s, int sLength) {
         // Validate arguments
-        if (s == null) {
+        if (s == null) { // O(1)
             s = "";
         }
-        if (sLength < 1) {
+        if (sLength < 1) { // O(1)
             throw new IllegalArgumentException("Shingle size must be positive");
         }
 
         // Initialize instance variables
-        this.s = s;
-        this.sLength = sLength;
-        alphaToNMinusOne = (long) Math.pow(alpha, sLength - 1);
+        this.s = s; // O(1)
+        this.sLength = sLength; // O(1)
+        alphaToNMinusOne = (long) Math.pow(alpha, sLength - 1); // O(log(k))
     }
 
     Tuple next() {
